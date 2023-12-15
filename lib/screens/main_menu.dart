@@ -1,0 +1,50 @@
+import 'package:flappy_flame/game/assets.dart';
+import 'package:flappy_flame/game/flappy_bird_game.dart';
+import 'package:flutter/material.dart';
+
+class MainMenuScreen extends StatelessWidget {
+  final FlappyBirdGame game;
+  static const String id = 'mainMenu';
+
+  const MainMenuScreen({super.key, required this.game});
+
+  @override
+  Widget build(BuildContext context) {
+    game.pauseEngine();
+    return Scaffold(
+      body: GestureDetector(
+        onTap: (){
+          game.overlays.remove('mainMenu');
+          game.resumeEngine();
+        },
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(Assets.menu),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Tap on the screen to START",
+                  style: TextStyle(color: Colors.white, fontSize: 24,fontWeight: FontWeight.normal),
+                ),
+                Text(
+                  "FARZI",
+                  style: TextStyle(color: Colors.white, fontSize: 32,fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 24,),
+                Image.asset(Assets.message)
+              ],
+            ),
+           ),
+        ),
+      ),
+    );
+  }
+}
